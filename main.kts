@@ -4,13 +4,54 @@ println("UW Homework: Simple Kotlin")
 
 // write a "whenFn" that takes an arg of type "Any" and returns a String
 
+fun whenFn(x : Any): String {
+    when (x) {
+        "Hello" -> return "world"
+        "Howdy", "Bonjour" -> return "Say what?"
+        0 -> return "zero"
+        1 -> return "one"
+        in 2..10 -> return "low number"
+        is Int -> return "a number"
+        else -> return "I don't understand"
+    }
+}
+
 // write an "add" function that takes two Ints, returns an Int, and adds the values
+
+fun add(a : Int, b : Int): Int {
+    return (a + b);
+}
+
 // write a "sub" function that takes two Ints, returns an Int, and subtracts the values
+
+fun sub(a : Int, b : Int):Int {
+    return (a - b);
+}
 // write a "mathOp" function that takes two Ints and a function (that takes two Ints and returns an Int), returns an Int, and applies the passed-in-function to the arguments
+
+fun mathOp(a : Int, b : Int, op: (Int, Int) -> Int): Int {
+    return op(a,b)
+}
 
 // write a class "Person" with first name, last name and age
 
+class Person (val firstName:String, val lastName:String, var age:Int) {
+
+    val debugString:String = "[Person firstName:" + firstName + " lastName:" + lastName + "age:" + age + "]";
+
+    override fun equals(other: Any?): Boolean{
+        if (this === other) return true
+        
+        other as Person
+        
+        return(other.firstName == this.firstName && other.lastName == this.lastName && other.age == this.age)
+    }
+}
+
 // write a class "Money"
+class Money(var amount:Int, var currency:String) {
+    
+}
 
 // ============ DO NOT EDIT BELOW THIS LINE =============
 
