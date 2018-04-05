@@ -47,8 +47,14 @@ class Person (val firstName:String, val lastName:String, var age:Int) {
         
         other as Person
         
-        return(other.firstName == this.firstName && other.lastName == this.lastName && other.age == this.age)
+        return(other.hashCode() == this.hashCode())
     }
+
+    override fun hashCode(): Int {
+        return(this.firstName.hashCode() + this.lastName.hashCode() + this.age.hashCode())
+    }
+
+
 }
 
 // write a class "Money"
@@ -83,7 +89,6 @@ class Money(amount:Int, currency:String) {
             "EUR" -> return Money(usdVal * 3 / 2, "EUR")
             else  -> return Money(usdVal, "USD")
         }
-        return Money(usdVal, "USD")
     }
 
     operator fun plus(b:Money):Money {
