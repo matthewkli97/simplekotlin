@@ -78,7 +78,7 @@ class Money(amount:Int, currency:String) {
     fun convert(type:String):Money {
         var usdVal:Int
         when(this.currency) {
-            "EUR" -> usdVal = this.amount / 3 * 2
+            "EUR" -> usdVal = this.amount * 2 / 3
             "CAN" -> usdVal = this.amount * 12 / 15
             "GBP" -> usdVal = this.amount * 2
             else -> usdVal = this.amount
