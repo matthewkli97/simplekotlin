@@ -60,14 +60,14 @@ class Person (val firstName:String, val lastName:String, var age:Int) {
 // write a class "Money"
 class Money(amount:Int, currency:String) {
 
-    var amount:Int = 2
+    var amount:Int = amount
         set(value) {
             if (value < 0) {
                 throw IllegalArgumentException("Negative value");
             }
             field = value
         }
-    var currency:String = "USD"
+    var currency:String = currency
         set(value) {
             when(value) {
                 "USD", "EUR", "CAN","GBP" -> field = value
@@ -79,12 +79,12 @@ class Money(amount:Int, currency:String) {
         var usdVal:Int
         when(this.currency) {
             "EUR" -> usdVal = this.amount / 3 * 2
-            "CAN" -> usdVal = this.amount * 15 / 12
+            "CAN" -> usdVal = this.amount * 12 / 15
             "GBP" -> usdVal = this.amount * 2
             else -> usdVal = this.amount
         }
         when(type) {
-            "CAN" -> return Money(usdVal * 12 / 15, "CAN")
+            "CAN" -> return Money(usdVal * 15 / 12, "CAN")
             "GBP" -> return Money(usdVal / 2, "GBP")
             "EUR" -> return Money(usdVal * 3 / 2, "EUR")
             else  -> return Money(usdVal, "USD")
