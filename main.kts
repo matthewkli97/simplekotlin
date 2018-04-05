@@ -37,7 +37,10 @@ fun mathOp(a : Int, b : Int, op: (Int, Int) -> Int): Int {
 
 class Person (val firstName:String, val lastName:String, var age:Int) {
 
-    val debugString:String = "[Person firstName:" + firstName + " lastName:" + lastName + "age:" + age + "]";
+    val debugString:String 
+        get() {
+            return "[Person firstName:" + firstName + " lastName:" + lastName + " age:" + age + "]"
+        }
 
     override fun equals(other: Any?): Boolean{
         if (this === other) return true
@@ -49,8 +52,43 @@ class Person (val firstName:String, val lastName:String, var age:Int) {
 }
 
 // write a class "Money"
-class Money(var amount:Int, var currency:String) {
-    
+class Money(amount:Int, currency:String) {
+
+    var amount:Int = 2
+        set(value) {
+            if (value < 0) {
+                throw IllegalArgumentException("Negative value");
+            }
+            field = value
+        }
+    var currency:String = "USD"
+        set(value) {
+            when(value) {
+                "USD", "EUR", "CAN","GBP" -> field = value
+                else -> throw IllegalArgumentException("Negative value")
+            }
+        }
+
+    fun convert(type:String):Money {
+        var usdVal:Int
+        when(this.currency) {
+            "EUR" -> usdVal = this.amount / 3 * 2
+            "CAN" -> usdVal = this.amount * 15 / 12
+            "GBP" -> usdVal = this.amount * 2
+            else -> usdVal = this.amount
+        }
+        when(type) {
+            "CAN" -> return Money(usdVal * 12 / 15, "CAN")
+            "GBP" -> return Money(usdVal / 2, "GBP")
+            "EUR" -> return Money(usdVal * 3 / 2, "EUR")
+            else  -> return Money(usdVal, "USD")
+        }
+        return Money(usdVal, "USD")
+    }
+
+    operator fun plus(b:Money):Money {
+        return Money(this.amount + b.convert(this.currency).amount, this.currency)
+    }
 }
 
 // ============ DO NOT EDIT BELOW THIS LINE =============
